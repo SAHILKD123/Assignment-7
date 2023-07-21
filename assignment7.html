@@ -1,0 +1,68 @@
+<html>
+  <body>
+    <div id="invisible">
+      <font size="8" color="green">Final test lab</font>
+      <br /><br />
+      Number of rows:
+      <input type="text" id="rows" /><br /><br />
+      Number of cols:
+      <input type="text" id="columns" /><br /><br />
+
+      <button id="b1" onclick="generateTable()">Generate Table</button
+      ><br /><br />
+    </div>
+    <button id="b2" onclick="addColumn()">Add Column</button>
+
+    <button id="b3" onclick="addRow()">Add Row</button>
+    <div id="tableContainer"></div>
+  </body>
+
+  <script language="javascript">
+    function generateTable() {
+      debugger;
+      const rows = parseInt(document.getElementById("rows").value);
+      const columns = parseInt(document.getElementById("columns").value);
+
+      let tableHtml = "<table border='1'>";
+      for (let i = 0; i < rows; i++) {
+        tableHtml += "<tr>";
+        for (let j = 0; j < columns; j++) {
+          tableHtml += "<td>Row " + (i + 1) + ", Column " + (j + 1) + "</td>";
+        }
+        tableHtml += "</tr>";
+      }
+      tableHtml += "</table>";
+      document.getElementById('invisible').style.display='none';
+
+      document.getElementById("tableContainer").innerHTML = tableHtml;
+      document.getElementById("rows").value = 1;
+      document.getElementById("columns").value = 1;
+
+    }
+
+    function addColumn() {
+      const table = document.querySelector("table");
+      const rows = table.querySelectorAll("tr");
+
+      rows.forEach((row) => {
+        const newCell = document.createElement("td");
+        newCell.textContent = "New Column";
+        row.appendChild(newCell);
+      });
+    }
+
+    function addRow() {
+      const table = document.querySelector("table");
+      const columns = table.querySelectorAll("tr:first-child td");
+
+      const newRow = document.createElement("tr");
+      columns.forEach((column) => {
+        const newCell = document.createElement("td");
+        newCell.textContent = "New Row";
+        newRow.appendChild(newCell);
+      });
+
+      table.appendChild(newRow);
+    }
+  </script>
+</html>
